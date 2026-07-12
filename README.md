@@ -44,6 +44,13 @@ before it. CPU-only, small enough to run in seconds to minutes.
    variants, optimizer choices (Adam), and where things like fine-tuning, RAG, and agent/tool-use sit
    on top of this foundation.
 
+## Setup
+
+```
+pip install -r requirements.txt
+pytest
+```
+
 ## How to work through it
 
 Each stage is a single, standalone, heavily-commented script — run it directly
