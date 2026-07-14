@@ -29,9 +29,13 @@ class Value:
         return out
 
     def __mul__(self, other):
-        # TODO: same shape as __add__, but multiplication's local
-        # derivative.
-        pass
+        other = other if isinstance(other, Value) else Value(other)
+        out = Value(self.data * other.data, (self, other), "*")
+        def _backward():
+            self.grad += other.data * out.grad
+            other.grad += self.data * out.grad
+        out._backward = _backward
+        return out
 
     def __pow__(self, power):
         # TODO: only constant (int/float) exponents. Power rule for the
