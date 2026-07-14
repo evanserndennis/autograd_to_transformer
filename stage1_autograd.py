@@ -38,9 +38,11 @@ class Value:
         return out
 
     def __pow__(self, power):
-        # TODO: only constant (int/float) exponents. Power rule for the
-        # local derivative.
-        pass
+        out = Value(self.data ** power, (self,), '**')
+        def _backward():
+            self.grad += (power * self.data ** (power - 1)) * out.grad
+        out._backward = _backward
+        return out
 
     def tanh(self):
         # TODO: local derivative is 1 - tanh(x)^2.
