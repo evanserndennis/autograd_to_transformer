@@ -80,10 +80,16 @@ class Value:
         pass
 
     def backward(self):
-        # TODO: build a reverse topological order (DFS, parents before
-        # self, then append self), seed self.grad = 1.0, then walk the
-        # reversed order calling each node's _backward().
-        pass
+        topo = []
+        visited = set()
+        def build_topo(v):
+            if v not in visited:
+                visited.add(v)
+                for t in v._prev: build_topo(t)
+                topo.append(v)
+        build_topo(self)
+        self.grad = 1.0
+        for v in reversed(topo): v._backward()
 
     def __repr__(self):
         pass
