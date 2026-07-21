@@ -59,7 +59,7 @@ class Value:
         return out
 
     def __neg__(self):
-        pass
+        return self * -1
 
     def __sub__(self, other):
         pass
