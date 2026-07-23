@@ -92,10 +92,15 @@ class Value:
         for v in reversed(topo): v._backward()
 
     def __repr__(self):
-        pass
+        return f'Value(data={self.data}, grad={self.grad})'
 
 
 if __name__ == "__main__":
-    # TODO: a small worked example you can verify by hand, e.g.
-    # d = a*b + c, f = tanh(d), then f.backward() and print the gradients.
-    pass
+    a = Value(1)
+    b = Value(2)
+    c = Value(3)
+    d = a * b + c
+    f = d.tanh()
+    f.backward()
+    print([a.grad, b.grad, c.grad, d.grad, f.grad])
+
