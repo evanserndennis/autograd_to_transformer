@@ -62,22 +62,22 @@ class Value:
         return self * -1
 
     def __sub__(self, other):
-        pass
+        return self + (-other)
 
     def __radd__(self, other):
-        pass
+        return self + other
 
     def __rmul__(self, other):
-        pass
+        return self * other
 
     def __rsub__(self, other):
-        pass
+        return other + (-self)
 
     def __truediv__(self, other):
-        pass
+        return self * (other ** -1)
 
     def __rtruediv__(self, other):
-        pass
+        return other * (self ** -1)
 
     def backward(self):
         topo = []
